@@ -15,7 +15,7 @@ JAVA、Spring Boot、Milvus、Python、FastAPI、RAG。
 # 启动流程
 1. 环境：打开 Docker 和 Milvus；（方法见 G盘 Code/Database/Milvus 文件夹。）
 2. 运行基于 Python 的 FastAPI，用于调用中文语言模型获得句子向量。
-代码见 D盘 D:\Code\sentence_transformers 文件夹，也已同步到https://github.com/cizhouyu/QQchat-Preprocessing.git。
+代码见 D盘 D:\Code\sentence_transformers 文件夹，也已同步到https://github.com/cizhouyu/QQchat-Preprocessing.git 。
 运行方式：命令行输入 conda activate strans，命令行输入 uvicorn quick_start:app --reload；
 3. 建立数据库：运行 model/JsonProcessor；
 4.  【可选测试 根据 query 查找数据库中最相近向量：运行 model/MilvusQuery】；
