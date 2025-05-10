@@ -1,0 +1,1 @@
+基于 Java 的主服务，在用户提问时实时生成 Embedding 向量，查询 Milvus 中存储的历史聊天记录向量，结合上下文做 Prompt Augmentation，实现 RAG（Retrieval-Augmented Generation）对话体验。
