@@ -94,30 +94,9 @@ public class Milvus {
     }
 
     public void build_dataset (List<JsonProcessor.DialogPair> dialogPairs) throws Exception{  // 如果不加 throws Exception，在调用qsentence2Vector时会报错。
-//        // 3. 从 SentenceVectorClient 获取句子向量
-//        List<String> sentences = Arrays.asList(
-//                "你好，今天的天气怎么样？",
-//                "今天天气不错，适合出去玩。",
-//                "今天的天气真好，阳光明媚。"
-//        );
-//            List<List<Float>> vectors
-//            String sentence = "你好，今天的天气怎么样？";
-
 
         // 遍历处理每个对话对
         for (JsonProcessor.DialogPair pair : dialogPairs) {
-            // 生成格式字符串
-//            String combined = String.format(
-//                    "对话上下文：%s [SEP] 朋友回复：%s",
-//                    pair.getContext(),
-//                    pair.getResponse()
-//            );
-
-            // 输出结果（可替换为其他处理逻辑）
-//            System.out.println(combined);
-            // 此处可添加生成语义向量等后续处理
-            // 获得合并对话对的语义向量
-//            JSONArray combined_vector = SentenceVectorClient.getSentenceVector(combined);
 
             List<List<Float>> vectors = qsentence2Vector(pair.getContext());
 
@@ -125,7 +104,6 @@ public class Milvus {
                     new InsertParam.Field("context", Collections.singletonList(pair.getContext())),
                     new InsertParam.Field("reply", Collections.singletonList(pair.getResponse())),
                     new InsertParam.Field("embedding", vectors)  // 将context向量化
-//                    new InsertParam.Field("embedding", Collections.singletonList(vector))
             );
 
             this.milvusClient.insert(
@@ -239,8 +217,6 @@ public class Milvus {
                     "今天天气不错，适合出去玩。",
                     "今天的天气真好，阳光明媚。"
             );
-//            List<List<Float>> vectors
-//            String sentence = "你好，今天的天气怎么样？";
 
             for (String sentence : sentences) {
                 List<List<Float>> vectors = qsentence2Vector(sentence);
@@ -307,7 +283,6 @@ public class Milvus {
             results.getIDScore(0).forEach(result -> {
                 System.out.println("ID: " + result.getScore() + ", Distance: " + result.getScore());
             });
-
 
             // 6. 清理（可选）
             // milvusClient.dropCollection(DropCollectionParam.newBuilder().withCollectionName(collectionName).build());

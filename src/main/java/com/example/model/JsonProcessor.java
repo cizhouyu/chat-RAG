@@ -3,10 +3,6 @@ package com.example.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.commons.lang3.ObjectUtils;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.io.File;
 import java.util.List;
 

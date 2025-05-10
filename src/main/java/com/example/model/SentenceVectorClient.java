@@ -8,11 +8,8 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.net.http.HttpHeaders;
 import java.nio.charset.StandardCharsets;
 
-//import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.JSONObject;
 
 public class SentenceVectorClient {
     // 获取句子向量的方法
@@ -69,7 +66,6 @@ public class SentenceVectorClient {
         System.out.println("Response body: " + response.body());
 
         // 解析响应 JSON
-//        ObjectMapper objectMapper = new ObjectMapper();
         JSONObject jsonResponse = new JSONObject(response.body());
         System.out.println("Received sentence vector: " + jsonResponse.getJSONArray("vector"));
     }

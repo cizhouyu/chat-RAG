@@ -1,8 +1,6 @@
 //负责创建 Milvus 数据库连接、插入向量、执行搜索等任务。
 
 package com.example.model;
-
-import io.milvus.grpc.IDs;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import io.milvus.client.MilvusServiceClient;
@@ -62,8 +60,6 @@ public class MilvusDemo {
                     "今天天气不错，适合出去玩。",
                     "今天的天气真好，阳光明媚。"
             );
-//            List<List<Float>> vectors
-//            String sentence = "你好，今天的天气怎么样？";
 
             for (String sentence : sentences) {
                 List<List<Float>> vectors = qsentence2Vector(sentence);

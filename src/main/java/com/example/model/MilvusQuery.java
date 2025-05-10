@@ -1,77 +1,8 @@
 package com.example.model;
-//
-//import io.milvus.client.*;
-////import io.milvus.grpc.CollectionStatistics;
-import io.milvus.exception.MilvusException;
+
 import io.milvus.grpc.GetCollectionStatisticsResponse;
-import io.milvus.grpc.SearchResultData;
 import io.milvus.grpc.SearchResults;
 import io.milvus.param.ConnectParam;
-//import io.milvus.param.collection.GetCollectionStatisticsParam;
-//import io.milvus.param.collection.HasCollectionParam;
-//
-//public class MilvusQuery {
-//    private final MilvusServiceClient milvusClient;
-//    private final String collectionName;
-//
-//    // 连接现有数据库的构造函数
-//    public MilvusQuery(String collectionName) {
-//        // 1. 连接到已存在的 Milvus 服务
-//        this.milvusClient = new MilvusServiceClient(
-//                ConnectParam.newBuilder()
-//                        .withHost("127.0.0.1")
-//                        .withPort(19530)
-//                        .build()
-//        );
-//
-//        this.collectionName = collectionName;
-//
-//        // 2. 验证集合是否存在
-//        if (!milvusClient.hasCollection(HasCollectionParam.newBuilder()
-//                .withCollectionName(collectionName)
-//                .build()).hasCollection()) {
-//            throw new RuntimeException("集合不存在: " + collectionName);
-//        }
-//    }
-//
-//    // 查询集合中的向量条数
-//    public long getVectorCount() {
-//        // 获取集合统计信息
-//        R<CollectionStatistics> response = milvusClient.getCollectionStatistics(
-//                GetCollectionStatisticsParam.newBuilder()
-//                        .withCollectionName(collectionName)
-//                        .build()
-//        );
-//
-//        if (response.getStatus() != R.Status.Success.getCode()) {
-//            throw new RuntimeException("查询失败: " + response.getMessage());
-//        }
-//
-//        // 解析统计结果中的行数
-//        return Long.parseLong(
-//                response.getData().getStats().stream()
-//                        .filter(stat -> stat.getKey().equals("row_count"))
-//                        .findFirst()
-//                        .orElseThrow(() -> new RuntimeException("未找到行数统计"))
-//                        .getValue()
-//        );
-//    }
-//
-//    public static void main(String[] args) {
-//        String collectionName = "demo_collection418"; // 必须与已存在的集合名称一致
-//
-//        try {
-//            MilvusQuery query = new MilvusQuery(collectionName);
-//            long count = query.getVectorCount();
-//            System.out.println("集合中的向量数量: " + count);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//}
-
-
-
 import io.milvus.client.*;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -106,9 +37,6 @@ public class MilvusQuery {
     public long getVectorCount() {
         try {
             // 检查集合是否存在
-//            boolean exists = milvusClient.hasCollection(HasCollectionParam.newBuilder()
-//                    .withCollectionName(collectionName)
-//                    .build()).hasCollection();
             R<Boolean> exists = milvusClient.hasCollection(HasCollectionParam.newBuilder()
                     .withCollectionName(collectionName)
                     .build());
@@ -134,32 +62,6 @@ public class MilvusQuery {
             throw new RuntimeException("查询失败", e);
         }
     }
-
-//    public void getQueryNeibor(String querySentence) throws Exception{
-//        List<List<Float>> searchVectors = qsentence2Vector(querySentence);
-//
-//        SearchParam searchParam = SearchParam.newBuilder()
-//                .withCollectionName(collectionName)
-//                .withMetricType(MetricType.L2)
-//                .withOutFields(Collections.singletonList("id"))
-//                .withTopK(3)
-//                .withVectors(searchVectors)
-//                .withVectorFieldName("embedding")
-//                .withParams("{\"nprobe\":10}")
-//                .build();
-//
-//        R<SearchResults> rawSearchResult = milvusClient.search(searchParam);
-//
-//        // 提取内部的 SearchResultData 对象
-//        SearchResultData resultData = rawSearchResult.getData().getResults();
-//
-//        SearchResultsWrapper results = new SearchResultsWrapper(resultData);
-//
-//        System.out.println("搜索结果：");
-//        results.getIDScore(0).forEach(result -> {
-//            System.out.println("ID: " + result.getScore() + ", Distance: " + result.getScore());
-//        });
-//    }
 
     public Map<String, Object> getQueryNeibor(String querySentence) {
         Map<String, Object> resultMap = new HashMap<>();
